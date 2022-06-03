@@ -47,9 +47,9 @@ namespace MatchGame
             }
         }
 
-        private void SetUpGame()
+        private void SetUpGame() //happens while game starts
         {
-            List<string> animalEmoji = new List<string>()
+            List<string> animalEmoji = new List<string>() //list of available animals as emojis
             {
                "🐙","🐙","🐟","🐟",
                "🐅","🐅","🐈","🐈",
@@ -76,33 +76,35 @@ namespace MatchGame
 
         TextBlock lastTextBlockClicked;
         bool findingMatch = false;
-        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e) //click on any animal
         {
             TextBlock textBlock = sender as TextBlock;
-            if(findingMatch == false) //choosing first animal
+            if(findingMatch == false)                               //choosing first animal
             {
-                textBlock.Visibility = Visibility.Hidden;
+                //textBlock.Visibility = Visibility.Hidden;
+                textBlock.Background = Brushes.LightGray;
                 lastTextBlockClicked = textBlock;
                 findingMatch = true;
             }
-            else if(textBlock.Text == lastTextBlockClicked.Text) // match
+            else if(textBlock.Text == lastTextBlockClicked.Text)    // match
             {
                 textBlock.Visibility = Visibility.Hidden;
+                lastTextBlockClicked.Visibility = Visibility.Hidden;
                 findingMatch = false;
                 matchesFound++;
             }
-            else
+            else                                                    // not a match
             {
-                lastTextBlockClicked.Visibility = Visibility.Visible; // not a match
+                lastTextBlockClicked.Visibility = Visibility.Visible; 
                 findingMatch = false;
             }
         }
 
-        private void TimeTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TimeTextBlock_MouseDown(object sender, MouseButtonEventArgs e) //
         {
             if(matchesFound == 8)
             {
-                SetUpGame();
+                SetUpGame(); //### - doesn't reload after new game
             }
         }
     }
